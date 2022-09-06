@@ -6,13 +6,10 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
+// 设置title
 const name = defaultSettings.title || 'vue Admin Template' // page title
 
-// If your port is set to 80,
-// use administrator privileges to execute the command line.
-// For example, Mac: sudo npm run
-// You can change the port by the following methods:
-// port = 9528 npm run dev OR npm run dev --port = 9528
+// 设置端口
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
@@ -36,7 +33,12 @@ module.exports = {
       warnings: false,
       errors: true
     },
-   
+    proxy: {
+      '/api': { // 匹配所有以 '/api1'开头的请求路径
+        target: 'http://42.192.129.12:3001/', // 跨域请求的地址
+        changOrigin: true // 表示开启跨域
+      }
+    }
   },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
