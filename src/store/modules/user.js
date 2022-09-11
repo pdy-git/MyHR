@@ -1,9 +1,10 @@
 
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login } from '@/api/user'
+import { login, getUesrInfo, getUserDetailById } from '@/api/user'
 
 const state = {
-  token: getToken()
+  token: getToken(),
+  uesrInfo: {}
 }
 const mutations = {
   setToken(state, token) {
@@ -13,6 +14,12 @@ const mutations = {
   removeToken(state) {
     state.token = null
     removeToken()
+  },
+  setUesrInfo(state, result) {
+    state.uesrInfo = result
+  },
+  removeUesrInfo(state) {
+    state.uesrInfo = {}
   }
 }
 const actions = {
@@ -23,7 +30,15 @@ const actions = {
     } catch (error) {
       console.log(error)
     }
+  },
+  async getUesrInfo(context) {
+    const res = await getUesrInfo()
+    const baseInfo = await getUserDetailById(res.userId)
+    const baseResult = { ...res, ...baseInfo }
+    context.commit('setUesrInfo', baseResult)
+    return res // 这里为什么要返回 为后面埋下伏笔
   }
+
 }
 
 export default {

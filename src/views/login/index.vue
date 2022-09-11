@@ -59,7 +59,6 @@
 <script>
 import { validMobile } from '@/utils/validate'
 import { mapActions } from 'vuex' // 引入vuex的辅助函数
-import { login } from '@/api/user'
 
 export default {
   name: 'Login',
@@ -107,30 +106,30 @@ export default {
       })
     },
     handleLogin() {
-      // this.$refs.loginForm.validate(valid => {
-      //   if (valid) {
-      //     this.loading = true
-      //     this.$store.dispatch('user/login', this.loginForm).then(() => {
-      //       this.$router.push({ path: this.redirect || '/' })
-      //       this.loading = false
-      //     }).catch(() => {
-      //       this.loading = false
-      //     })
-      //   } else {
-      //     console.log('error submit!!')
-      //     return false
-      //   }
-      // })
-      this.$refs.loginForm.validate((isOk) => {
-        if (isOk) {
-          try {
-            this['user/login'](this.loginForm)
-            this.$router.push('/')
-          } catch (error) {
-            login(error)
-          }
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.loginForm).then(() => {
+            this.$router.push({ path: this.redirect || '/' })
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
         }
       })
+      // this.$refs.loginForm.validate((isOk) => {
+      //   if (isOk) {
+      //     try {
+      //       this['user/login'](this.loginForm)
+      //       this.$router.push('/')
+      //     } catch (error) {
+      //       login(error)
+      //     }
+      //   }
+      // })
     }
   }
 }
