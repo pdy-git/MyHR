@@ -12,7 +12,7 @@
         <div class="avatar-wrapper">
           <img
             v-imgerror="defaultImg"
-            :src="staffPhoto"
+
             class="user-avatar"
           >
           <span>{{ name }}</span>
@@ -23,7 +23,7 @@
             <el-dropdown-item>Home</el-dropdown-item>
           </router-link>
           <el-dropdown-item divided @click.native="logout">
-            <span style="display: block">Log Out</span>
+            <span style="display: block">登出</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -36,7 +36,7 @@
 import { mapGetters } from 'vuex'
 // import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
-import defaultImg from '@/assets/common/head.jpg'
+// import defaultImg from '@/assets/common/head.jpg'
 
 export default {
   components: {
@@ -45,7 +45,7 @@ export default {
   },
   data() {
     return {
-      defaultImg: defaultImg
+      defaultImg: require('@/assets/common/head.jpg')
     }
   },
   computed: {
@@ -60,9 +60,9 @@ export default {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },
-    async logout() {
-      await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    logout() {
+      this.$store.dispatch('user/logout')
+      this.$router.push('/login')
     }
   }
 }
