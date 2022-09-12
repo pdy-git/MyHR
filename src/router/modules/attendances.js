@@ -2,9 +2,10 @@ import Layout from '@/layout'
 
 export default {
   path: '/attendances',
-  name: 'attendances',
+
   component: Layout,
   children: [{
+    name: 'attendances',
     path: '',
     component: () => import('@/views/attendances'),
     meta: {

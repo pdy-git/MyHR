@@ -115,3 +115,18 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+//  组织架构的层级
+export function tranListTotreeData(list, rootvalue) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === rootvalue) {
+      const children = tranListTotreeData(list, item.id)
+      if (children.length) {
+        item.children = children // 长度大于0 ， 找到子节点
+      }
+      arr.push(item) // 将内容加入到数组中
+    }
+  })
+  return arr
+}

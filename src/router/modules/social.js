@@ -2,9 +2,9 @@ import Layout from '@/layout'
 
 export default {
   path: '/social',
-  name: 'social',
   component: Layout,
   children: [{
+    name: 'social',
     path: '',
     component: () => import('@/views/social'),
     meta: {

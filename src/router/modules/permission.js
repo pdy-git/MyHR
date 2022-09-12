@@ -2,9 +2,9 @@ import Layout from '@/layout'
 
 export default {
   path: '/permission', // 路由地址
-  name: 'permission',
   component: Layout,
   children: [{
+    name: 'permission',
     path: '',
     component: () => import('@/views/permission'),
     meta: {
