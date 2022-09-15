@@ -16,6 +16,9 @@ import * as directives from '@/directives'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import Components from '@/components'
+Vue.use(Components) // 全局组件的自定义注册
+
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 
